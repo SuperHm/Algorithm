@@ -17,32 +17,20 @@ public:
 private:
 	vector<int> weights;
 	vector<int> leftMax;
-	vector<int> bp;
 	string result;
 };
 
 Solution::Solution(){
-	weights.push_back(1);
-	weights.push_back(3);
-	weights.push_back(9);
-	weights.push_back(27);
-	weights.push_back(81);
+	weights = { 1, 3, 9, 27, 81 };
 	leftMax.resize(5);
 	leftMax[0] = weights[0];
 	for (int i = 1; i < 5; ++i)
 		leftMax[i] = leftMax[i - 1] + weights[i];
-	bp.resize(121);
-	bp[1] = 1;
-	bp[3] = 3;
-	bp[9] = 9;
-	bp[27] = 27;
-	bp[81] = 81;
 }
 
 void Solution::buildBP(int num){
-	vector<int> init = {1,3,9,27,81};
-	vector<int>::iterator iter = find(init.begin(), init.end(), num);
-	if (iter != init.end()){
+	vector<int>::iterator iter = find(weights.begin(), weights.end(), num);
+	if (iter != weights.end()){
 		result += to_string(*iter);
 		return;
 	}
